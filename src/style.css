@@ -38,3 +38,7 @@ body {
   height: 100%;
   background-color: purple;
 }
+
+.current-project {
+  color: blue;
+}

@@ -5,25 +5,29 @@ export const domController = (function () {
   const projectsUl = document.getElementById('projects');
   const addTodoBtn = document.getElementById('add-todo');
   const addProjectBtn = document.getElementById('add-project');
-  addTodoBtn.addEventListener('click', addTodoBtnClick);
-  addProjectBtn.addEventListener('click', addProjectBtnClick);
+  addTodoBtn.addEventListener('click', clickAddTodoBtn);
+  addProjectBtn.addEventListener('click', clickAddProjectBtn);
 
-  function addTodoBtnClick(){
+  function clickAddTodoBtn(){
     logicController.addTodo('todo title', 'desc', 'due', 'priority', 'notes');
     render();
   }
 
-  function addProjectBtnClick() {
+  function clickAddProjectBtn() {
     logicController.addProject('project-title');
     render();
   }
 
   function render(){
+    console.log('render');
     projectsUl.textContent = "";
     todosUl.textContent = "";
 
-    const todos = logicController.getTodos();
+    
     const projects = logicController.getProjects();
+    const curProject = logicController.getCurrentProject();
+    // const todos = logicController.getTodos();
+    const todos = curProject.getTodos();
     todos.forEach((todo, idx) => {
       const todoLi = document.createElement('li');
       todoLi.textContent = todo.title;
@@ -35,8 +39,17 @@ export const domController = (function () {
       const projectLi = document.createElement('li');
       projectLi.textContent = project.title;
       projectLi.setAttribute('data-index', idx);
+      projectLi.addEventListener('click', clickProject);
+      if(project === curProject) {
+        projectLi.classList.add('current-project');
+      }
       projectsUl.appendChild(projectLi);
     });
+  }
+
+  function clickProject(e) {
+    logicController.setCurrentProject(e.target.dataset.index);
+    render();
   }
 
   render();
