@@ -19,6 +19,10 @@ time, mark, audio, video {
 	vertical-align: baseline;
 }
 
+ul {
+  list-style-type: none;
+}
+
 body {
   height: 100vh;
   width: 100vw;
@@ -26,11 +30,11 @@ body {
   grid-template-columns: 1fr 3fr;
 }
 
-#projects {
+#project-section {
   height: 100%;
   background-color: red; 
 }
-#todos {
+#todo-section {
   height: 100%;
   background-color: purple;
 }
