@@ -26,8 +26,7 @@ export const domController = (function () {
     
     const projects = logicController.getProjects();
     const curProject = logicController.getCurrentProject();
-    // const todos = logicController.getTodos();
-    const todos = curProject.getTodos();
+    const todos = logicController.getTodos();
     todos.forEach((todo, idx) => {
       const todoLi = document.createElement('li');
       todoLi.textContent = todo.title;

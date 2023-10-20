@@ -25,5 +25,9 @@ export const logicController = (function() {
     return curProject;
   }
 
-  return { addTodo, getTodos: curProject.getTodos, addProject, getProjects, setCurrentProject, getCurrentProject }
+  function getTodos() {
+    return curProject.getTodos();
+  }
+
+  return { addTodo, getTodos, addProject, getProjects, setCurrentProject, getCurrentProject }
 })();
