@@ -5,6 +5,7 @@ export const domController = (function () {
   const projectsUl = document.getElementById('projects');
   const addTodoBtn = document.getElementById('add-todo');
   const addProjectBtn = document.getElementById('add-project');
+  const projectModal = document.getElementById('project-modal');
   addTodoBtn.addEventListener('click', clickAddTodoBtn);
   addProjectBtn.addEventListener('click', clickAddProjectBtn);
 
@@ -14,8 +15,9 @@ export const domController = (function () {
   }
 
   function clickAddProjectBtn() {
-    logicController.addProject('project-title');
-    render();
+    projectModal.showModal();
+    // logicController.addProject('project-title');
+    // render();
   }
 
   function render(){
