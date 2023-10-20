@@ -1,14 +1,12 @@
 import createTodo from "./todo";
+import createProject from "./project";
 
 export const logicController = (function() {
-  const todos = [];
+  let curProject = createProject('General');
+
   function addTodo(title, description, dueDate, priority, notes){
-    const todo = createTodo(title, description, dueDate, priority, notes);
-    todos.push(todo);
+    curProject.addTodo(title, description, dueDate, priority, notes)
   }
 
-  function getTodos() {
-    return todos;
-  }
-  return { addTodo, getTodos }
+  return { addTodo, getTodos: curProject.getTodos }
 })();
