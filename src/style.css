@@ -26,11 +26,11 @@ body {
   grid-template-columns: 1fr 3fr;
 }
 
-.projects {
+#projects {
   height: 100%;
   background-color: red; 
 }
-.todos {
+#todos {
   height: 100%;
   background-color: purple;
 }
