@@ -2,11 +2,18 @@ import { logicController } from "./logicController";
 
 export const domController = (function () {
   const todosDiv = document.getElementById('todos');
-  const createTodoBtn = document.getElementById('create-todo');
-  createTodoBtn.addEventListener('click', createTodoBtnClick);
+  const createTodoBtn = document.getElementById('add-todo');
+  createTodoBtn.addEventListener('click', addTodoBtnClick);
 
-  function createTodoBtnClick(){
-    const todo = logicController.createTodo('title', 'desc', 'due', 'priority', 'notes');
-    console.log(todo);
+  function addTodoBtnClick(){
+    logicController.addTodo('title', 'desc', 'due', 'priority', 'notes');
+    render();
   }
+
+  function render(){
+    const todos = logicController.getTodos();
+    console.log(todos);
+  }
+
+  render();
 })();
