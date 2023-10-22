@@ -6,8 +6,14 @@ export const domController = (function () {
   const addTodoBtn = document.getElementById('add-todo');
   const addProjectBtn = document.getElementById('add-project');
   const projectModal = document.getElementById('project-modal');
+  const closeModalBtn = document.getElementById('close-project-modal');
+  const confirmModalBtn = document.getElementById('confirm-project');
+  const newProjectName = document.getElementById('project-name');
+  const projectForm = document.querySelector('#project-section form');
   addTodoBtn.addEventListener('click', clickAddTodoBtn);
   addProjectBtn.addEventListener('click', clickAddProjectBtn);
+  closeModalBtn.addEventListener('click', clickCloseModalBtn);
+  confirmModalBtn.addEventListener('click', clickConfirmModalBtn);
 
   function clickAddTodoBtn(){
     logicController.addTodo('todo title', 'desc', 'due', 'priority', 'notes');
@@ -16,8 +22,16 @@ export const domController = (function () {
 
   function clickAddProjectBtn() {
     projectModal.showModal();
-    // logicController.addProject('project-title');
-    // render();
+  }
+
+  function clickCloseModalBtn() {
+    projectModal.close();
+  }
+
+  function clickConfirmModalBtn() {
+    logicController.addProject(newProjectName.value);
+    projectForm.reset();
+    render();
   }
 
   function render(){
