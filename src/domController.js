@@ -14,6 +14,8 @@ export const domController = (function () {
   addProjectBtn.addEventListener('click', clickAddProjectBtn);
   closeModalBtn.addEventListener('click', clickCloseModalBtn);
   confirmModalBtn.addEventListener('click', clickConfirmModalBtn);
+  projectForm.addEventListener('submit', submitProjectForm);
+  newProjectName.addEventListener('focus', focusProjectNameInput);
 
   function clickAddTodoBtn(){
     logicController.addTodo('todo title', 'desc', 'due', 'priority', 'notes');
@@ -29,9 +31,19 @@ export const domController = (function () {
   }
 
   function clickConfirmModalBtn() {
-    logicController.addProject(newProjectName.value);
-    projectForm.reset();
-    render();
+    if (projectForm.checkValidity()) {
+      logicController.addProject(newProjectName.value);
+      projectModal.close();
+      render();
+    }
+  }
+
+  function submitProjectForm(e) {
+    e.preventDefault();
+  }
+
+  function focusProjectNameInput() {
+    newProjectName.value = '';
   }
 
   function render(){
