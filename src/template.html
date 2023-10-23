@@ -20,6 +20,24 @@
   </div>
   <div id="todo-section">
     <button type="button" id="add-todo">Add Todo</button>
+    <dialog id="todo-modal">
+      <form method="dialog">
+        <label for="todo-title">Title:</label>
+        <input type="text" id="todo-title" name="todo-title" placeholder="Walk Dog" required>
+        <label for="todo-description">Description:</label>
+        <textarea name="todo-description" id="todo-description" cols="30" rows="10"></textarea>
+        <label for="todo-due-date">Due Date:</label>
+        <input type="date" id="todo-due-date" name="todo-due-date">
+        <label for="todo-priority">Priority:</label>
+        <select name="todo-priority" id="todo-priority">
+          <option value="low">Low</option>
+          <option value="medium" selected="selected">Medium</option>
+          <option value="high">High</option>
+        </select>
+        <button type="button" id="close-todo-modal">Close</button>
+        <button type="submit" id="confirm-todo">Add</button>
+      </form>
+    </dialog>
     <ul id="todos"></ul>
   </div>
 </body>

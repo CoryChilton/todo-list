@@ -4,8 +4,8 @@ export const logicController = (function() {
   let curProject = createProject('General');
   const projects = [curProject];
 
-  function addTodo(title, description, dueDate, priority, notes){
-    curProject.addTodo(title, description, dueDate, priority, notes)
+  function addTodo(title, description, dueDate, priority){
+    curProject.addTodo(title, description, dueDate, priority)
   }
 
   function addProject(title) {

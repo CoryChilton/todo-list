@@ -6,19 +6,20 @@ export const domController = (function () {
   const addTodoBtn = document.getElementById('add-todo');
   const addProjectBtn = document.getElementById('add-project');
   const projectModal = document.getElementById('project-modal');
-  const closeModalBtn = document.getElementById('close-project-modal');
-  const confirmModalBtn = document.getElementById('confirm-project');
-  const newProjectName = document.getElementById('project-name');
+  const closeProjectModalBtn = document.getElementById('close-project-modal');
+  const confirmProjectModalBtn = document.getElementById('confirm-project');
+  const newProjectNameInput = document.getElementById('project-name');
   const projectForm = document.querySelector('#project-section form');
+  const todoModal = document.getElementById('todo-modal');
   addTodoBtn.addEventListener('click', clickAddTodoBtn);
   addProjectBtn.addEventListener('click', clickAddProjectBtn);
-  closeModalBtn.addEventListener('click', clickCloseModalBtn);
-  confirmModalBtn.addEventListener('click', clickConfirmModalBtn);
+  closeProjectModalBtn.addEventListener('click', clickCloseProjectModalBtn);
+  confirmProjectModalBtn.addEventListener('click', clickConfirmProjectModalBtn);
   projectForm.addEventListener('submit', submitProjectForm);
-  newProjectName.addEventListener('focus', focusProjectNameInput);
 
   function clickAddTodoBtn(){
-    logicController.addTodo('todo title', 'desc', 'due', 'priority', 'notes');
+    todoModal.showModal();
+    // logicController.addTodo('todo title', 'desc', 'due', 'priority');
     render();
   }
 
@@ -26,13 +27,13 @@ export const domController = (function () {
     projectModal.showModal();
   }
 
-  function clickCloseModalBtn() {
+  function clickCloseProjectModalBtn() {
     projectModal.close();
   }
 
-  function clickConfirmModalBtn() {
+  function clickConfirmProjectModalBtn() {
     if (projectForm.checkValidity()) {
-      logicController.addProject(newProjectName.value);
+      logicController.addProject(newProjectNameInput.value);
       projectModal.close();
       render();
     }
@@ -40,10 +41,7 @@ export const domController = (function () {
 
   function submitProjectForm(e) {
     e.preventDefault();
-  }
-
-  function focusProjectNameInput() {
-    newProjectName.value = '';
+    projectForm.reset();
   }
 
   function render(){
