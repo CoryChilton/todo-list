@@ -12,6 +12,10 @@ export const logicController = (function() {
     curProject.addTodo(title, description, dueDate, priority)
   }
 
+  function editTodo(title, description, dueDate, priority, index) {
+    curProject.editTodo(title, description, dueDate, priority, index);
+  }
+
   function addProject(title) {
     const project = createProject(title);
     projects.push(project);
@@ -38,5 +42,5 @@ export const logicController = (function() {
     curProject.deleteTodo(idx);
   }
 
-  return { addTodo, getTodos, addProject, getProjects, setCurrentProject, getCurrentProject, deleteTodo }
+  return { addTodo, getTodos, addProject, getProjects, setCurrentProject, getCurrentProject, deleteTodo, editTodo }
 })();

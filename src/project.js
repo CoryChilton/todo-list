@@ -16,5 +16,13 @@ export default function createProject(title) {
     todos.splice(idx, 1)
   }
 
-  return { title, addTodo, getTodos, deleteTodo }
+  function editTodo(title, description, dueDate, priority, index) {
+    const todo = todos[index];
+    todo.title = title;
+    todo.description = description;
+    todo.dueDate = dueDate;
+    todo.priority = priority;
+  }
+
+  return { title, addTodo, getTodos, deleteTodo, editTodo }
 }

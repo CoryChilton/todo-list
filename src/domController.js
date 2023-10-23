@@ -18,6 +18,7 @@ export const domController = (function () {
   const todoDescriptionTextArea = document.getElementById('todo-description');
   const todoDateInput = document.getElementById('todo-due-date');
   const todoPrioritySelect = document.getElementById('todo-priority');
+  const todoDetailsModal = document.getElementById('todo-details-modal');
 
 
   addTodoBtn.addEventListener('click', clickAddTodoBtn);
@@ -30,16 +31,24 @@ export const domController = (function () {
   todoForm.addEventListener('submit', submitTodoForm);
 
   function clickAddTodoBtn(){
+    confirmTodoModalBtn.textContent = 'Add';
     todoModal.showModal();
   }
 
   function clickCloseTodoModalBtn() {
+    if (confirmTodoModalBtn.textContent === 'Done') {
+      todoForm.reset();
+    }
     todoModal.close();
   }
 
-  function clickConfirmTodoModalBtn() {
+  function clickConfirmTodoModalBtn(e) {
     if (todoForm.checkValidity()) {
-      logicController.addTodo(todoTitleInput.value, todoDescriptionTextArea.value, todoDateInput.value, todoPrioritySelect.value);
+      if (confirmTodoModalBtn.textContent === 'Add') {
+        logicController.addTodo(todoTitleInput.value, todoDescriptionTextArea.value, todoDateInput.value, todoPrioritySelect.value);
+      } else {
+        logicController.editTodo(todoTitleInput.value, todoDescriptionTextArea.value, todoDateInput.value, todoPrioritySelect.value, e.target.dataset.index);
+      }
       todoModal.close()
       render();
     }
@@ -105,7 +114,14 @@ export const domController = (function () {
     }
 
     function clickTodoDetailsBtn(e) {
-      console.log(todos[e.target.dataset.index]);
+      const todo = todos[e.target.dataset.index];
+      confirmTodoModalBtn.textContent = 'Done';
+      confirmTodoModalBtn.setAttribute('data-index', e.target.dataset.index);
+      todoTitleInput.value = todo.title;
+      todoDescriptionTextArea.value = todo.description;
+      todoPrioritySelect.value = todo.priority;
+      todoDateInput.value = todo.dueDate;
+      todoModal.showModal();
     }
 
     projects.forEach((project, idx) => {
