@@ -12,5 +12,9 @@ export default function createProject(title) {
     return todos;
   }
 
-  return { title, addTodo, getTodos }
+  function deleteTodo(idx) {
+    todos.splice(idx, 1)
+  }
+
+  return { title, addTodo, getTodos, deleteTodo }
 }

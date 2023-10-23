@@ -29,5 +29,9 @@ export const logicController = (function() {
     return curProject.getTodos();
   }
 
-  return { addTodo, getTodos, addProject, getProjects, setCurrentProject, getCurrentProject }
+  function deleteTodo(idx) {
+    curProject.deleteTodo(idx);
+  }
+
+  return { addTodo, getTodos, addProject, getProjects, setCurrentProject, getCurrentProject, deleteTodo }
 })();

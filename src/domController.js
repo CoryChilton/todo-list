@@ -84,10 +84,19 @@ export const domController = (function () {
     const todos = logicController.getTodos();
     todos.forEach((todo, idx) => {
       const todoLi = document.createElement('li');
-      todoLi.textContent = todo.title;
-      todoLi.setAttribute('data-index', idx);
+      todoLi.textContent = `${todo.title} Description: ${todo.description} Due Date: ${todo.dueDate} Priority: ${todo.priority}`;
+      const deleteBtn = document.createElement('button');
+      deleteBtn.textContent = 'X';
+      deleteBtn.setAttribute('data-index', idx);
+      deleteBtn.addEventListener('click', clickDeleteTodoBtn);
+      todoLi.appendChild(deleteBtn);
       todosUl.appendChild(todoLi);
     });
+
+    function clickDeleteTodoBtn(e) {
+      logicController.deleteTodo(e.target.dataset.index);
+      render();
+    }
 
     projects.forEach((project, idx) => {
       const projectLi = document.createElement('li');
