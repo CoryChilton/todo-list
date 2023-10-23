@@ -18,7 +18,6 @@ export const domController = (function () {
   const todoDescriptionTextArea = document.getElementById('todo-description');
   const todoDateInput = document.getElementById('todo-due-date');
   const todoPrioritySelect = document.getElementById('todo-priority');
-  const todoDetailsModal = document.getElementById('todo-details-modal');
 
 
   addTodoBtn.addEventListener('click', clickAddTodoBtn);
