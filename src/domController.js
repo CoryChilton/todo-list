@@ -1,4 +1,5 @@
 import { logicController } from "./logicController";
+import { format } from 'date-fns';
 
 export const domController = (function () {
   const todosUl = document.getElementById('todos');
@@ -43,10 +44,13 @@ export const domController = (function () {
 
   function clickConfirmTodoModalBtn(e) {
     if (todoForm.checkValidity()) {
+      const dueDate = new Date(todoDateInput.value);
+      console.log(todoDateInput.value);
+      console.log(dueDate);
       if (confirmTodoModalBtn.textContent === 'Add') {
-        logicController.addTodo(todoTitleInput.value, todoDescriptionTextArea.value, todoDateInput.value, todoPrioritySelect.value);
+        logicController.addTodo(todoTitleInput.value, todoDescriptionTextArea.value, dueDate, todoPrioritySelect.value);
       } else {
-        logicController.editTodo(todoTitleInput.value, todoDescriptionTextArea.value, todoDateInput.value, todoPrioritySelect.value, e.target.dataset.index);
+        logicController.editTodo(todoTitleInput.value, todoDescriptionTextArea.value, dueDate, todoPrioritySelect.value, e.target.dataset.index);
       }
       todoModal.close()
       render();
@@ -91,7 +95,7 @@ export const domController = (function () {
     todos.forEach((todo, idx) => {
       const todoLi = document.createElement('li');
       const todoContentDiv = document.createElement('div');
-      todoContentDiv.textContent = `${todo.title} Due Date: ${todo.dueDate}`;
+      todoContentDiv.textContent = `${todo.title} Due Date: ${todo.dueDate ? format(todo.dueDate, 'LLLL do, yyyy') : ''}`;
       todoLi.classList.add(`${todo.priority === 'High' ? 'high-priority' : todo.priority === 'Medium' ? 'medium-priority' : 'low-priority' }`)
       const deleteBtn = document.createElement('button');
       deleteBtn.textContent = 'X';
@@ -119,7 +123,7 @@ export const domController = (function () {
       todoTitleInput.value = todo.title;
       todoDescriptionTextArea.value = todo.description;
       todoPrioritySelect.value = todo.priority;
-      todoDateInput.value = todo.dueDate;
+      todoDateInput.valueAsDate = todo.dueDate;
       todoModal.showModal();
     }
 

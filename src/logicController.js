@@ -4,9 +4,9 @@ export const logicController = (function() {
   let curProject = createProject('General');
   const projects = [curProject];
   // For testing purposes
-  addTodo('Walk Dog', 'Take charlie out', '6/10/23', 'Medium');
-  addTodo('Take out trash', 'Before dark ideally', '10/23/23', 'High');
-  addTodo('Wash up', 'All of the plastics and pots and pans', '10/22/23', 'Low');
+  addTodo('Walk Dog', 'Take charlie out', new Date(2023, 6, 10), 'Medium');
+  addTodo('Take out trash', 'Before dark ideally', new Date(2022, 11, 11), 'High');
+  addTodo('Wash up', 'All of the plastics and pots and pans', new Date(2024, 0, 1), 'Low');
 
   function addTodo(title, description, dueDate, priority){
     curProject.addTodo(title, description, dueDate, priority)
