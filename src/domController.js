@@ -9,18 +9,47 @@ export const domController = (function () {
   const closeProjectModalBtn = document.getElementById('close-project-modal');
   const confirmProjectModalBtn = document.getElementById('confirm-project');
   const newProjectNameInput = document.getElementById('project-name');
-  const projectForm = document.querySelector('#project-section form');
+  const projectForm = document.querySelector('#project-modal form');
   const todoModal = document.getElementById('todo-modal');
+  const todoForm = document.querySelector('#todo-modal form')
+  const closeTodoModalBtn = document.getElementById('close-todo-modal');
+  const confirmTodoModalBtn = document.getElementById('confirm-todo');
+  const todoTitleInput = document.getElementById('todo-title');
+  const todoDescriptionTextArea = document.getElementById('todo-description');
+  const todoDateInput = document.getElementById('todo-due-date');
+  const todoPrioritySelect = document.getElementById('todo-priority');
+
+
   addTodoBtn.addEventListener('click', clickAddTodoBtn);
   addProjectBtn.addEventListener('click', clickAddProjectBtn);
   closeProjectModalBtn.addEventListener('click', clickCloseProjectModalBtn);
   confirmProjectModalBtn.addEventListener('click', clickConfirmProjectModalBtn);
   projectForm.addEventListener('submit', submitProjectForm);
+  closeTodoModalBtn.addEventListener('click', clickCloseTodoModalBtn);
+  confirmTodoModalBtn.addEventListener('click', clickConfirmTodoModalBtn);
+  todoForm.addEventListener('submit', submitTodoForm);
 
   function clickAddTodoBtn(){
     todoModal.showModal();
     // logicController.addTodo('todo title', 'desc', 'due', 'priority');
-    render();
+    // render();
+  }
+
+  function clickCloseTodoModalBtn() {
+    todoModal.close();
+  }
+
+  function clickConfirmTodoModalBtn() {
+    if (todoForm.checkValidity()) {
+      logicController.addTodo(todoTitleInput.value, todoDescriptionTextArea.value, todoDateInput.value, todoPrioritySelect.value);
+      todoModal.close()
+      render();
+    }
+  }
+
+  function submitTodoForm(e) {
+    e.preventDefault();
+    todoForm.reset();
   }
 
   function clickAddProjectBtn() {
