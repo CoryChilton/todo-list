@@ -89,7 +89,12 @@ export const domController = (function () {
       deleteBtn.textContent = 'X';
       deleteBtn.setAttribute('data-index', idx);
       deleteBtn.addEventListener('click', clickDeleteTodoBtn);
+      const detailsBtn = document.createElement('button');
+      detailsBtn.textContent = 'Details';
+      detailsBtn.setAttribute('data-index', idx);
+      detailsBtn.addEventListener('click', clickTodoDetailsBtn);
       todoLi.appendChild(todoContentDiv);
+      todoLi.appendChild(detailsBtn);
       todoLi.appendChild(deleteBtn);
       todosUl.appendChild(todoLi);
     });
@@ -97,6 +102,10 @@ export const domController = (function () {
     function clickDeleteTodoBtn(e) {
       logicController.deleteTodo(e.target.dataset.index);
       render();
+    }
+
+    function clickTodoDetailsBtn(e) {
+      console.log(todos[e.target.dataset.index]);
     }
 
     projects.forEach((project, idx) => {
