@@ -82,11 +82,14 @@ export const domController = (function () {
     const todos = logicController.getTodos();
     todos.forEach((todo, idx) => {
       const todoLi = document.createElement('li');
-      todoLi.textContent = `${todo.title} Description: ${todo.description} Due Date: ${todo.dueDate} Priority: ${todo.priority}`;
+      const todoContentDiv = document.createElement('div');
+      todoContentDiv.textContent = `${todo.title} Due Date: ${todo.dueDate}`;
+      todoLi.classList.add(`${todo.priority === 'High' ? 'high-priority' : todo.priority === 'Medium' ? 'medium-priority' : 'low-priority' }`)
       const deleteBtn = document.createElement('button');
       deleteBtn.textContent = 'X';
       deleteBtn.setAttribute('data-index', idx);
       deleteBtn.addEventListener('click', clickDeleteTodoBtn);
+      todoLi.appendChild(todoContentDiv);
       todoLi.appendChild(deleteBtn);
       todosUl.appendChild(todoLi);
     });

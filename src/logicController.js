@@ -3,6 +3,10 @@ import createProject from "./project";
 export const logicController = (function() {
   let curProject = createProject('General');
   const projects = [curProject];
+  // For testing purposes
+  addTodo('Walk Dog', 'Take charlie out', '6/10/23', 'Medium');
+  addTodo('Take out trash', 'Before dark ideally', '10/23/23', 'High');
+  addTodo('Wash up', 'All of the plastics and pots and pans', '10/22/23', 'Low');
 
   function addTodo(title, description, dueDate, priority){
     curProject.addTodo(title, description, dueDate, priority)

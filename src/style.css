@@ -34,6 +34,7 @@ body {
   height: 100%;
   background-color: red; 
 }
+
 #todo-section {
   height: 100%;
   background-color: purple;
@@ -41,4 +42,20 @@ body {
 
 .current-project {
   color: blue;
+}
+
+#todo-section li {
+  display: flex;
+}
+
+.low-priority {
+  border-left: 3px solid blue;
+}
+
+.medium-priority {
+  border-left: 3px solid yellow;
+}
+
+.high-priority {
+  border-left: 3px solid red;
 }
