@@ -11,6 +11,7 @@ export const logicController = (function() {
   function addProject(title) {
     const project = createProject(title);
     projects.push(project);
+    curProject = project;
   }
 
   function getProjects() {

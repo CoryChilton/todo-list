@@ -31,8 +31,6 @@ export const domController = (function () {
 
   function clickAddTodoBtn(){
     todoModal.showModal();
-    // logicController.addTodo('todo title', 'desc', 'due', 'priority');
-    // render();
   }
 
   function clickCloseTodoModalBtn() {
