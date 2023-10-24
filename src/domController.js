@@ -142,5 +142,12 @@ export const domController = (function () {
     render();
   }
 
+  // document.addEventListener("DOMContentLoaded", () => {
+  //   logicController.setContentFromStorage();
+  //   console.log('DOM Content Loaded')
+  //   render();
+  // });
   render();
+
+  
 })();

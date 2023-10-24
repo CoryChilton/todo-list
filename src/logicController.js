@@ -1,15 +1,21 @@
 import createProject from "./project";
 
 export const logicController = (function() {
-  let curProject = createProject('General');
-  const projects = [curProject];
-  // For testing purposes
-  addTodo('Walk Dog', 'Take charlie out', new Date(2023, 6, 10), 'Medium');
-  addTodo('Take out trash', 'Before dark ideally', new Date(2022, 11, 11), 'High');
-  addTodo('Wash up', 'All of the plastics and pots and pans', new Date(2024, 0, 1), 'Low');
+  
+  let projects = [];
+  let curProject = null;
+  setContentFromStorage();
+  curProject = projects[0];
+  
+  // addProject('General');
+  
+  // // For testing purposes
+  // addTodo('Walk Dog', 'Take charlie out', new Date(2023, 6, 10), 'Medium');
+  // addTodo('Take out trash', 'Before dark ideally', new Date(2022, 11, 11), 'High');
+  // addTodo('Wash up', 'All of the plastics and pots and pans', new Date(2024, 0, 1), 'Low');
 
   function addTodo(title, description, dueDate, priority){
-    curProject.addTodo(title, description, dueDate, priority)
+    curProject.addTodo(title, description, dueDate, priority);
   }
 
   function editTodo(title, description, dueDate, priority, index) {
@@ -20,6 +26,7 @@ export const logicController = (function() {
     const project = createProject(title);
     projects.push(project);
     curProject = project;
+    populateProjectStorage();
   }
 
   function getProjects() {
@@ -42,5 +49,21 @@ export const logicController = (function() {
     curProject.deleteTodo(idx);
   }
 
-  return { addTodo, getTodos, addProject, getProjects, setCurrentProject, getCurrentProject, deleteTodo, editTodo }
+  function populateProjectStorage() {
+    localStorage.setItem('projects', JSON.stringify(projects));
+  }
+
+  function setContentFromStorage(){
+    const projectsStorage = JSON.parse(localStorage.getItem('projects'));
+    const todosStorage = JSON.parse(localStorage.getItem('todos'));
+    if (projectsStorage) {
+      projectsStorage.forEach(project => {
+        addProject(project.title);
+      });
+    } else {
+      addProject('General');
+    }
+  }
+
+  return { addTodo, getTodos, addProject, getProjects, setCurrentProject, getCurrentProject, deleteTodo, editTodo, setContentFromStorage };
 })();
