@@ -44,9 +44,7 @@ export const domController = (function () {
 
   function clickConfirmTodoModalBtn(e) {
     if (todoForm.checkValidity()) {
-      const dueDate = new Date(todoDateInput.value);
-      console.log(todoDateInput.value);
-      console.log(dueDate);
+      const dueDate = new Date(`${todoDateInput.value}T12:00:00`);
       if (confirmTodoModalBtn.textContent === 'Add') {
         logicController.addTodo(todoTitleInput.value, todoDescriptionTextArea.value, dueDate, todoPrioritySelect.value);
       } else {
