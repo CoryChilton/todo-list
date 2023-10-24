@@ -4,7 +4,7 @@ export const logicController = (function() {
   
   let projects = [];
   let curProject = null;
-  setContentFromStorage();
+  setProjectsFromStorage();
   curProject = projects[0];
   
   // addProject('General');
@@ -27,6 +27,7 @@ export const logicController = (function() {
     projects.push(project);
     curProject = project;
     populateProjectStorage();
+    return project;
   }
 
   function getProjects() {
@@ -53,17 +54,22 @@ export const logicController = (function() {
     localStorage.setItem('projects', JSON.stringify(projects));
   }
 
-  function setContentFromStorage(){
+  function setProjectsFromStorage(){
     const projectsStorage = JSON.parse(localStorage.getItem('projects'));
-    const todosStorage = JSON.parse(localStorage.getItem('todos'));
     if (projectsStorage) {
       projectsStorage.forEach(project => {
-        addProject(project.title);
+        const todosStorage = JSON.parse(localStorage.getItem(`todos${project.title}`));
+        const p = addProject(project.title);
+        if (todosStorage) {
+          todosStorage.forEach(todo => {
+            p.addTodo(todo.title, todo.description, new Date(todo.dueDate), todo.priority);
+          });
+        }
       });
     } else {
       addProject('General');
     }
   }
 
-  return { addTodo, getTodos, addProject, getProjects, setCurrentProject, getCurrentProject, deleteTodo, editTodo, setContentFromStorage };
+  return { addTodo, getTodos, addProject, getProjects, setCurrentProject, getCurrentProject, deleteTodo, editTodo };
 })();
